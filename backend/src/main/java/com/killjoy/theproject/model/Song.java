@@ -16,8 +16,8 @@ public class Song implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(name = "title")
+    @Column(name = "title", columnDefinition = "varchar(1000)")
     private String title;
-    @Column(name = "lyrics")
+    @Column(name = "lyrics", columnDefinition = "varchar(2500)")
     private String lyrics;
 }

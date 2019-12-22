@@ -4,8 +4,8 @@ import axios from 'axios';
 
 class Container extends React.Component {
     state = {
-        searchResult: [{word: '', count: 0}],
-        searchSongs: [{id: 0, title: '', lyrics: ''}],
+        searchResult: [],
+        searchSongs: [],
         songs: [],
         mostused: [],
         searchTerm: '',
@@ -27,17 +27,17 @@ class Container extends React.Component {
             <div className="container">
                 <div className="row mt-4 mb-4">
                     <div className="col-md-12">
-                        <h3 className="text-center"><a href="http://localhost:8081/">Song Word Frequency Search Library Prototype</a></h3>
+                        <h3 className="text-center"><a href="http://localhost:8081/">Song Word Frequency Search Library Prototype</a></h3><br/>
                     </div>
-                    <div className="col-md-8 offset-md-2">
+                    <div className="col-md-12">
                         <div className="row">
-                            <div className="col-md-9">
-                                <input className="form-control mr-sm-2" type="search" name="searchterm" placeholder="Search"
+                            <div className="col-md-8">
+                                <input className="form-control mr-sm-2" type="search" name="searchterm" placeholder="Search for keywords like 'dreamland'"
                                        aria-label="Search" value={this.state.searchTerm} onChange={
                                     (env) => this.setState({searchTerm: env.target.value})
                                 }/>
                             </div>
-                            <div className="col-md-3">
+                            <div className="col-md-4">
                                 <button className="btn btn-primary btn-block" type="button"
                                         onClick={() => this.getData()}>Search
                                 </button>
@@ -47,8 +47,17 @@ class Container extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-md-8">
-                        I have found <b>{this.state.searchResult.count}</b> occurances of the word <b>{this.state.searchResult.word}</b>.<br/>
-                        The words can be found in the following song lyrics: <br/><br/>
+                        {this.state.searchResult.word && (
+                            <>
+                            I have found <b>{this.state.searchResult.count}</b> occurances of the word <b>{this.state.searchResult.word}</b>.<br/>
+                            </>
+                        )}
+
+                        {this.state.searchSongs.length > 0 && (
+                            <>
+                                The word can be found in the following song lyrics: <br/><br/>
+                            </>
+                        )}
 
                         {this.state.searchSongs.map((song) =>
                             <React.Fragment>
@@ -59,21 +68,21 @@ class Container extends React.Component {
                     </div>
                     <div className="col-md-4">
                         <h3>Add new song</h3>
-                        <input className="form-control mr-sm-2" type="text" name="title" placeholder="title" value={this.state.title} onChange={
+                        <input className="form-control mr-sm-2" type="text" name="title" placeholder="Song title" value={this.state.title} onChange={
                             (env) => this.setState({title: env.target.value})
-                        }/>
-                        <input className="form-control mr-sm-2" type="text" name="lyrics" placeholder="lyrics" value={this.state.lyrics} onChange={
+                        }/><br/>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" name="lyrics" rows="5" placeholder="Lyrics" value={this.state.lyrics} onChange={
                             (env) => this.setState({lyrics: env.target.value})
-                        }/>
+                        }/><br/>
                         <button className="btn btn-primary btn-block" type="button" onClick={() => this.addSong()}>Add song</button>
                         <br/>
                         {this.state.newSongAdded && <p>New song added!</p>}
 
 
                         <h3>Most used words</h3>
-                        {this.state.mostused.slice(0, 20).map((mostused) =>
+                        {this.state.mostused.slice(0, 20).map((mostused, index) =>
                             <React.Fragment>
-                                <p><b>{mostused.word}</b>: <small>{mostused.count}</small></p>
+                                <p>- <b>{mostused.word.toLowerCase()}</b>: <small>{mostused.count}</small></p>
                             </React.Fragment>
                         )}
                     </div>

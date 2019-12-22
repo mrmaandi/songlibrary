@@ -22,9 +22,9 @@ public class SongsService {
     JdbcTemplate jdbcTemplate;
 
     public FrequenciesResult getWordsBySearchTerm(String searchTerm) {
-        String sql = "SELECT MIN(word), count(*) FROM (SELECT regexp_split_to_table(lyrics, '\\s') as word FROM songs) t WHERE lower(word) LIKE ? GROUP BY lower(word);";
+        String sql = "SELECT MIN(word) as word, count(*) FROM (SELECT regexp_split_to_table(lyrics, '\\s') as word FROM songs) t WHERE lower(word) LIKE ? GROUP BY lower(word);";
         try {
-            return jdbcTemplate.queryForObject(sql, new Object[]{"%" + searchTerm + "%"}, new BeanPropertyRowMapper<>(FrequenciesResult.class));
+            return jdbcTemplate.queryForObject(sql, new Object[]{searchTerm}, new BeanPropertyRowMapper<>(FrequenciesResult.class));
         } catch (EmptyResultDataAccessException error) {
             FrequenciesResult result = new FrequenciesResult();
             result.setWord(searchTerm);
