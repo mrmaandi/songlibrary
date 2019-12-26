@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -18,28 +19,36 @@ public class SongsController {
     private SongsService service;
 
     @GetMapping("/search")
-    @ResponseBody
     @CrossOrigin
     public List<FrequenciesResult> searchSongs(@RequestParam(required = false) String searchTerm) {
         return service.getWordsBySearchTerm(searchTerm.toLowerCase());
     }
 
     @GetMapping("/mostused")
-    @ResponseBody
     @CrossOrigin
     public List<FrequenciesResult> findMostUsedWords() {
         return service.findMostUsedWords();
     }
 
     @GetMapping("/songs")
-    @ResponseBody
     @CrossOrigin
     public List<Song> findAllSongs() {
         return repository.findAll();
     }
 
+    @GetMapping("/songbyid")
+    @CrossOrigin
+    public Optional<Song> findSongById(@RequestParam String id) {
+        return repository.findById(Long.valueOf(id));
+    }
+
+    @DeleteMapping("/deletesong")
+    @CrossOrigin
+    public void deleteSongById(@RequestParam String id) {
+        repository.deleteById(Long.valueOf(id));
+    }
+
     @GetMapping("/songsbyterm")
-    @ResponseBody
     @CrossOrigin
     public List<Song> findAllSongsContainingWord(@RequestParam(required = false) String searchTerm) {
         return service.findSongsByTerm(searchTerm.toLowerCase());
