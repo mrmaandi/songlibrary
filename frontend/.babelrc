@@ -1,8 +1,10 @@
 {
-  "presets": [
-    "@babel/preset-react"
-  ],
   "plugins": [
-    "babel-plugin-transform-class-properties"
+    ["@babel/plugin-proposal-decorators", { "legacy": true }]
+  ],
+  "presets": [
+    "@babel/env",
+    "@babel/react",
+    "@babel/typescript"
   ]
 }
