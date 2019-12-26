@@ -20,7 +20,7 @@ public class SongsController {
     @GetMapping("/search")
     @ResponseBody
     @CrossOrigin
-    public FrequenciesResult searchSongs(@RequestParam(required = false) String searchTerm) {
+    public List<FrequenciesResult> searchSongs(@RequestParam(required = false) String searchTerm) {
         return service.getWordsBySearchTerm(searchTerm.toLowerCase());
     }
 

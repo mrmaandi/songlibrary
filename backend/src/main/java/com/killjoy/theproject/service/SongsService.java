@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +20,18 @@ public class SongsService {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public FrequenciesResult getWordsBySearchTerm(String searchTerm) {
-        String sql = "SELECT MIN(word) as word, count(*) FROM (SELECT regexp_split_to_table(lyrics, '\\s') as word FROM songs) t WHERE lower(word) LIKE ? GROUP BY lower(word);";
+    public List<FrequenciesResult> getWordsBySearchTerm(String searchTerm) {
+        String sql = "SELECT MIN(word) as word, count(*) FROM (SELECT regexp_split_to_table(lyrics, '\\s') as word, title FROM songs) t WHERE lower(word) LIKE ? GROUP BY lower(word);";
         try {
-            return jdbcTemplate.queryForObject(sql, new Object[]{searchTerm}, new BeanPropertyRowMapper<>(FrequenciesResult.class));
+            return jdbcTemplate.query(
+                    sql,
+                    new Object[]{"%" + searchTerm + "%"},
+                    (rs, rowNum) -> new FrequenciesResult(
+                            rs.getString("word"),
+                            rs.getInt("count")
+                    ));
         } catch (EmptyResultDataAccessException error) {
-            FrequenciesResult result = new FrequenciesResult();
-            result.setWord(searchTerm);
-            result.setCount(0);
-            return result;
+            return new ArrayList<>();
         }
     }
 
