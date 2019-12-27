@@ -68,7 +68,6 @@ class Header extends React.Component<HeaderProps, {}> {
 
   private getSearchResultData() {
     const { searchStore } = this.props;
-    console.log('123');
 
     axios
         .get(

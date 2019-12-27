@@ -28,6 +28,7 @@ class LibraryComponent extends React.Component<{}, LibraryComponentState> {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
+                <th scope="col">Artist</th>
                 <th scope="col" />
               </tr>
             </thead>
@@ -38,6 +39,7 @@ class LibraryComponent extends React.Component<{}, LibraryComponentState> {
                   <td>
                     <Link to={"/song/" + song.id}>{song.title}</Link>{" "}
                   </td>
+                  <td>{song.artist.name}</td>
                   <td>
                     <i
                       className="fas fa-trash"

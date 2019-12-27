@@ -20,4 +20,7 @@ public class Song implements Serializable {
     private String title;
     @Column(name = "lyrics", columnDefinition = "varchar(2500)")
     private String lyrics;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "artist_id", nullable = false)
+    private Artist artist;
 }

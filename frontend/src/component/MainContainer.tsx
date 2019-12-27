@@ -20,27 +20,25 @@ class MainContainer extends React.Component<{}, MainContainerState> {
     super(props);
     this.state = {
       rootStore: new RootStore()
-    }
+    };
   }
 
   public render() {
     return (
       <Router>
-        <div>
-          <Provider {...this.state.rootStore}>
-            <Header />
+        <Provider {...this.state.rootStore}>
+          <Header />
+          <div className="container">
             <Switch>
-              <div className="container">
-                <Route exact path="/" component={Container} />
-                <Route path="/new" component={AddNewSongComponent} />
-                <Route path="/song/:id" component={SongComponent} />
-                <Route path="/library" component={LibraryComponent} />
-                <Route path="/mostused" component={MostUsedWordsComponent} />
-              </div>
+              <Route exact path="/" component={Container} />
+              <Route path="/new" component={AddNewSongComponent} />
+              <Route path="/song/:id" component={SongComponent} />
+              <Route path="/library" component={LibraryComponent} />
+              <Route path="/mostused" component={MostUsedWordsComponent} />
             </Switch>
-            <Footer />
-          </Provider>
-        </div>
+          </div>
+          <Footer />
+        </Provider>
       </Router>
     );
   }

@@ -9,7 +9,10 @@ interface SongComponentState {
   song: any;
 }
 
-class SongComponent extends React.Component<SongComponentProps, SongComponentState> {
+class SongComponent extends React.Component<
+  SongComponentProps,
+  SongComponentState
+> {
   constructor(props: SongComponentProps) {
     super(props);
     this.state = {
@@ -18,24 +21,33 @@ class SongComponent extends React.Component<SongComponentProps, SongComponentSta
   }
 
   componentDidMount() {
-    const { match: { params } } = this.props;
+    const {
+      match: { params }
+    } = this.props;
 
-    axios.get(`http://localhost:8080/api/songbyid?id=${params.id}`).then(res => {
-      const data = res.data;
-      this.setState({ song: data });
-    });
+    axios
+      .get(`http://localhost:8080/api/songbyid?id=${params.id}`)
+      .then(res => {
+        const data = res.data;
+        this.setState({ song: data });
+      });
   }
 
   public render() {
     return (
       <div className="row">
         <div className="col-md-12">
-          <h3>
-            {this.state.song.title}
-          </h3>
-          <p>
-            {this.state.song.lyrics}
-          </p>
+          {this.state.song.lyrics && (
+            <div className="text-center">
+              <h3>{this.state.song.title}</h3>
+              {this.state.song.lyrics.split("\n").map((line, index) => (
+                <React.Fragment key={index}>
+                  {line}
+                  <br />
+                </React.Fragment>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     );

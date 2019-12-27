@@ -26,10 +26,10 @@ class Container extends React.Component<ContainerProps, {}> {
               <>
                 <p>
                   Did you mean&nbsp;
-                  {searchStore.searchResult.map(result => (
-                    <>
+                  {searchStore.searchResult.map((result, index) => (
+                    <span key={index}>
                       <b>{result.word}</b> ({result.count}){" "}
-                    </>
+                    </span>
                   ))}
                   <br />
                 </p>
@@ -52,8 +52,8 @@ class Container extends React.Component<ContainerProps, {}> {
               </>
             )}
 
-            {searchStore.searchSongs.map(song => (
-              <React.Fragment>
+            {searchStore.searchSongs.map((song, index) => (
+              <React.Fragment key={index}>
                 <p>
                   <b>{song.title}</b>
                   <br />
