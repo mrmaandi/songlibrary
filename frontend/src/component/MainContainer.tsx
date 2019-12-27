@@ -8,6 +8,7 @@ import Header from "./Header";
 import { observer, Provider } from "mobx-react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import RootStore from "../store/RootStore";
+import MostUsedWordsComponent from "./MostUsedWordsComponent";
 
 interface MainContainerState {
   rootStore: RootStore;
@@ -15,7 +16,6 @@ interface MainContainerState {
 
 @observer
 class MainContainer extends React.Component<{}, MainContainerState> {
-
   constructor(props: {}) {
     super(props);
     this.state = {
@@ -27,7 +27,7 @@ class MainContainer extends React.Component<{}, MainContainerState> {
     return (
       <Router>
         <div>
-          <Provider store={this.state.rootStore}>
+          <Provider {...this.state.rootStore}>
             <Header />
             <Switch>
               <div className="container">
@@ -35,6 +35,7 @@ class MainContainer extends React.Component<{}, MainContainerState> {
                 <Route path="/new" component={AddNewSongComponent} />
                 <Route path="/song/:id" component={SongComponent} />
                 <Route path="/library" component={LibraryComponent} />
+                <Route path="/mostused" component={MostUsedWordsComponent} />
               </div>
             </Switch>
             <Footer />

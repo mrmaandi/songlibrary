@@ -20,13 +20,35 @@ class LibraryComponent extends React.Component<{}, LibraryComponentState> {
 
   public render() {
     return (
-      <div className="col-md-12">
-        <h3>Library</h3>
-        {this.state.library.map((song: any, index: number) => (
-          <div>
-            {index + 1}. <Link to={"/song/" + song.id}>{song.title}</Link> <i className="fas fa-trash" onClick={() => this.deleteSong(song.id)}/>
-          </div>
-        ))}
+      <div className="row">
+        <div className="col-md-12">
+          <h3>Library</h3>
+          <table className="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col" />
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.library.map((song: any, index: number) => (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>
+                    <Link to={"/song/" + song.id}>{song.title}</Link>{" "}
+                  </td>
+                  <td>
+                    <i
+                      className="fas fa-trash"
+                      onClick={() => this.deleteSong(song.id)}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }

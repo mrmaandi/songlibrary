@@ -24,17 +24,27 @@ class MostUsedWordsComponent extends React.Component<{}, MostUsedWordsComponentS
     return (
       <div className="row">
         <div className="col-md-12">
-          <h3>Most used words (top 50)</h3>
-          <p>
+          <h3>Most used words (top 100)</h3>
+          <table className="table table-striped table-sm">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Word</th>
+              <th scope="col">Count</th>
+            </tr>
+            </thead>
+            <tbody>
             {this.state.mostUsed
-              .slice(0, 50)
+              .slice(0, 100)
               .map((mostUsed: any, index: number) => (
-                <span key={index}>
-                  <b>{mostUsed.word.toLowerCase()}</b> (
-                  <small>{mostUsed.count}</small>),&nbsp;
-                </span>
+                <tr key={index}>
+                  <td>{index+1}</td>
+                  <td>{mostUsed.word.toLowerCase()}</td>
+                  <td>{mostUsed.count}</td>
+                </tr>
               ))}
-          </p>
+            </tbody>
+          </table>
         </div>
       </div>
     );
