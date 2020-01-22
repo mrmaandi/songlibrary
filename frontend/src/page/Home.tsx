@@ -1,6 +1,6 @@
 import * as React from "react";
 import axios from "axios";
-import MostUsedWordsComponent from "./MostUsedWordsComponent";
+import MostUsedWords from "./MostUsedWords";
 import { inject, observer } from "mobx-react";
 import SearchStore from "../store/SearchStore";
 
@@ -10,7 +10,7 @@ interface ContainerProps {
 
 @inject("searchStore")
 @observer
-class Container extends React.Component<ContainerProps, {}> {
+class Home extends React.Component<ContainerProps, {}> {
   constructor(props: ContainerProps) {
     super(props);
   }
@@ -68,4 +68,4 @@ class Container extends React.Component<ContainerProps, {}> {
   }
 }
 
-export default Container;
+export default Home;

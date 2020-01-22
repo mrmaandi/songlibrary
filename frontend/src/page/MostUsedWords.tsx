@@ -5,7 +5,7 @@ interface MostUsedWordsComponentState {
   mostUsed: any;
 }
 
-class MostUsedWordsComponent extends React.Component<{}, MostUsedWordsComponentState> {
+class MostUsedWords extends React.Component<{}, MostUsedWordsComponentState> {
   constructor(props: {}) {
     super(props);
     this.state = {
@@ -51,4 +51,4 @@ class MostUsedWordsComponent extends React.Component<{}, MostUsedWordsComponentS
   }
 }
 
-export default MostUsedWordsComponent;
+export default MostUsedWords;

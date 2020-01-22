@@ -1,5 +1,6 @@
 package com.killjoy.theproject.controller;
 
+import com.killjoy.theproject.model.Artist;
 import com.killjoy.theproject.model.FrequenciesResult;
 import com.killjoy.theproject.model.Song;
 import com.killjoy.theproject.repository.SongsRepository;
@@ -61,6 +62,7 @@ public class SongsController {
         Song song = new Song();
         song.setLyrics(lyrics);
         song.setTitle(title);
+        song.setArtist(new Artist(0, "Fox Stevenson"));
         repository.saveAndFlush(song);
     }
 }

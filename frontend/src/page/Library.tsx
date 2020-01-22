@@ -6,7 +6,7 @@ interface LibraryComponentState {
   library: any;
 }
 
-class LibraryComponent extends React.Component<{}, LibraryComponentState> {
+class Library extends React.Component<{}, LibraryComponentState> {
   constructor(props: {}) {
     super(props);
     this.state = {
@@ -23,6 +23,15 @@ class LibraryComponent extends React.Component<{}, LibraryComponentState> {
       <div className="row">
         <div className="col-md-12">
           <h3>Library</h3>
+          <Link to="/new">
+            <button
+                className="btn btn-primary btn-block"
+                type="button"
+            >
+              Add new track
+            </button>
+          </Link>
+          <br />
           <table className="table table-striped table-sm">
             <thead>
               <tr>
@@ -39,7 +48,7 @@ class LibraryComponent extends React.Component<{}, LibraryComponentState> {
                   <td>
                     <Link to={"/song/" + song.id}>{song.title}</Link>{" "}
                   </td>
-                  <td>{song.artist.name}</td>
+                  <td>{song.artist ? song.artist.name : "unknown"}</td>
                   <td>
                     <i
                       className="fas fa-trash"
@@ -69,4 +78,4 @@ class LibraryComponent extends React.Component<{}, LibraryComponentState> {
   }
 }
 
-export default LibraryComponent;
+export default Library;

@@ -1,14 +1,14 @@
 import * as React from "react";
-import Container from "./Container";
-import AddNewSongComponent from "./AddNewSongComponent";
-import SongComponent from "./SongComponent";
-import LibraryComponent from "./LibraryComponent";
+import Home from "../page/Home";
+import NewTrack from "../page/NewTrack";
+import Song from "../page/Song";
+import Library from "../page/Library";
 import Footer from "./Footer";
 import Header from "./Header";
 import { observer, Provider } from "mobx-react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import RootStore from "../store/RootStore";
-import MostUsedWordsComponent from "./MostUsedWordsComponent";
+import MostUsedWords from "../page/MostUsedWords";
 
 interface MainContainerState {
   rootStore: RootStore;
@@ -30,11 +30,11 @@ class MainContainer extends React.Component<{}, MainContainerState> {
           <Header />
           <div className="container">
             <Switch>
-              <Route exact path="/" component={Container} />
-              <Route path="/new" component={AddNewSongComponent} />
-              <Route path="/song/:id" component={SongComponent} />
-              <Route path="/library" component={LibraryComponent} />
-              <Route path="/mostused" component={MostUsedWordsComponent} />
+              <Route exact path="/" component={Home} />
+              <Route path="/new" component={NewTrack} />
+              <Route path="/song/:id" component={Song} />
+              <Route path="/library" component={Library} />
+              <Route path="/mostused" component={MostUsedWords} />
             </Switch>
           </div>
           <Footer />

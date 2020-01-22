@@ -9,7 +9,7 @@ interface SongComponentState {
   song: any;
 }
 
-class SongComponent extends React.Component<
+class Song extends React.Component<
   SongComponentProps,
   SongComponentState
 > {
@@ -54,4 +54,4 @@ class SongComponent extends React.Component<
   }
 }
 
-export default SongComponent;
+export default Song;

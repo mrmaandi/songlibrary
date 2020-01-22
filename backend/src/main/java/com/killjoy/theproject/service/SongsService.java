@@ -1,6 +1,5 @@
 package com.killjoy.theproject.service;
 
-import com.killjoy.theproject.model.Artist;
 import com.killjoy.theproject.model.FrequenciesResult;
 import com.killjoy.theproject.model.Song;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +59,7 @@ public class SongsService {
                             rs.getInt("id"),
                             rs.getString("title"),
                             rs.getString("lyrics"),
-                            new Artist()
+                            null
                     ));
         } catch (EmptyResultDataAccessException error) {
             return new ArrayList<>();
